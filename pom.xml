@@ -32,7 +32,7 @@
 
     <groupId>org.wildfly.clustering</groupId>
     <artifactId>wildfly-clustering-tomcat</artifactId>
-    <version>12.0.0.Beta1-SNAPSHOT</version>
+    <version>15.0.0.Final-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Distributed session management for Tomcat</name>
@@ -46,8 +46,6 @@
 
     <modules>
         <module>common</module>
-        <module>7.0</module>
-        <module>8.0</module>
         <module>8.5</module>
         <module>9.0</module>
         <module>10.0</module>
@@ -58,14 +56,15 @@
         <jdk.release.version>8</jdk.release.version>
         <version.jakarta.annotation>1.3.5</version.jakarta.annotation>
         <version.org.apache.httpcomponents>4.5.13</version.org.apache.httpcomponents>
-        <version.org.infinispan>11.0.5.Final</version.org.infinispan>
-        <version.org.infinispan.protostream>4.3.4.Final</version.org.infinispan.protostream>
+        <version.org.infinispan>12.1.7.Final</version.org.infinispan>
+        <version.org.infinispan.protostream>4.4.1.Final</version.org.infinispan.protostream>
         <version.org.infinispan.server>${version.org.infinispan}</version.org.infinispan.server>
+        <version.org.infinispan.server.driver>13.0.0.Dev03</version.org.infinispan.server.driver>
         <version.org.jboss.arquillian>1.6.0.Final</version.org.jboss.arquillian>
         <version.org.jboss.arquillian.container.tomcat>1.1.0.Final</version.org.jboss.arquillian.container.tomcat>
         <version.org.kohsuke.metainf-services>1.8</version.org.kohsuke.metainf-services>
-        <version.org.wildfly>22.0.0.Alpha1</version.org.wildfly>
-        <version.junit>4.13.1</version.junit>
+        <version.org.wildfly>25.0.0.Beta1</version.org.wildfly>
+        <version.junit>4.13.2</version.junit>
     </properties>
 
     <build>
@@ -144,11 +143,17 @@
                 <groupId>org.infinispan</groupId>
                 <artifactId>infinispan-client-hotrod</artifactId>
                 <version>${version.org.infinispan}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.jboss.spec.javax.transaction</groupId>
+                        <artifactId>jboss-transaction-api_1.2_spec</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.infinispan</groupId>
                 <artifactId>infinispan-server-testdriver-junit4</artifactId>
-                <version>${version.org.infinispan.server}</version>
+                <version>${version.org.infinispan.server.driver}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.infinispan</groupId>
@@ -200,10 +205,10 @@
                         <groupId>org.wildfly</groupId>
                         <artifactId>wildfly-clustering-service</artifactId>
                     </exclusion>
-                    <exclusion>
-                        <groupId>org.wildfly</groupId>
-                        <artifactId>wildfly-naming</artifactId>
-                    </exclusion>
+                    <exclusion>  
+                        <groupId>org.wildfly</groupId>  
+                        <artifactId>wildfly-naming</artifactId> 
+                    </exclusion>  
                 </exclusions>
             </dependency>
             <dependency>
@@ -271,12 +276,6 @@
                 <groupId>org.wildfly</groupId>
                 <artifactId>wildfly-clustering-web-cache</artifactId>
                 <version>${version.org.wildfly}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.jboss.msc</groupId>
-                        <artifactId>jboss-msc</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.wildfly</groupId>
@@ -297,6 +296,10 @@
                     <exclusion>
                         <groupId>org.wildfly</groupId>
                         <artifactId>wildfly-clustering-common</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.jboss.metadata</groupId>
+                        <artifactId>jboss-metadata-web</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
