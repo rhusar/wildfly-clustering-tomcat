@@ -46,7 +46,7 @@
 
     <modules>
         <module>common</module>
-        <module>7.0</module>
+<!--        <module>7.0</module>-->
         <module>8.5</module>
         <module>9.0</module>
         <module>10.0</module>
@@ -122,6 +122,12 @@
                     <groupId>com.googlecode.maven-download-plugin</groupId>
                     <artifactId>download-maven-plugin</artifactId>
                     <version>1.6.0</version>
+                </plugin>
+                <!-- Remove with jboss-parent upgrade to 39 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.2.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
